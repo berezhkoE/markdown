@@ -108,8 +108,8 @@ open class GFMFlavourDescriptor(
 
                 MarkdownElementTypes.LIST_ITEM to CheckedListItemGeneratingProvider(),
 
-                MarkdownElementTypes.INLINE_MATH to MathGeneratingProvider(inline = true),
-                MarkdownElementTypes.BLOCK_MATH to MathGeneratingProvider()
+                GFMElementTypes.INLINE_MATH to MathGeneratingProvider(inline = true),
+                GFMElementTypes.BLOCK_MATH to MathGeneratingProvider()
           )
     }
 }

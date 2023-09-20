@@ -273,11 +273,6 @@ GFM_AUTOLINK = (("http" "s"? | "ftp" | "file")"://" | "www.") {HOST_PART} ("." {
     return getReturnGeneralized(MarkdownTokenTypes.ESCAPED_BACKTICKS);
   }
 
-  // Escaped dollar sign
-  \\"$"+ {
-    return getReturnGeneralized(MarkdownTokenTypes.ESCAPED_DOLLAR);
-  }
-
   // Escaping
   \\[\\\"'`*_{}\[\]()#+.,!:@#$%&~<>/-] {
     return getReturnGeneralized(MarkdownTokenTypes.TEXT);
@@ -294,7 +289,7 @@ GFM_AUTOLINK = (("http" "s"? | "ftp" | "file")"://" | "www.") {HOST_PART} ("." {
   // Math
   "$"+ {
     if (canInline()) {
-      return MarkdownTokenTypes.DOLLAR;
+      return GFMTokenTypes.DOLLAR;
     }
     return parseDelimited.returnType;
   }

@@ -2,6 +2,8 @@ package org.intellij.markdown.parser.sequentialparsers.impl
 
 import org.intellij.markdown.MarkdownElementTypes
 import org.intellij.markdown.MarkdownTokenTypes
+import org.intellij.markdown.flavours.gfm.GFMElementTypes
+import org.intellij.markdown.flavours.gfm.GFMTokenTypes
 import org.intellij.markdown.parser.sequentialparsers.RangesListBuilder
 import org.intellij.markdown.parser.sequentialparsers.SequentialParser
 import org.intellij.markdown.parser.sequentialparsers.TokensCache
@@ -13,15 +15,15 @@ class MathParser : SequentialParser {
         var iterator: TokensCache.Iterator = tokens.RangesListIterator(rangesToGlue)
 
         while (iterator.type != null) {
-            if (iterator.type == MarkdownTokenTypes.DOLLAR || iterator.type == MarkdownTokenTypes.ESCAPED_DOLLAR) {
+            if (iterator.type == GFMTokenTypes.DOLLAR) {
 
-                val endIterator = findOfSize(iterator.advance(), getLength(iterator, true))
+                val endIterator = findOfSize(iterator.advance(), iterator.length)
 
                 if (endIterator != null) {
                     if (iterator.length == 1) {
-                        result.withNode(SequentialParser.Node(iterator.index..endIterator.index + 1, MarkdownElementTypes.INLINE_MATH))
+                        result.withNode(SequentialParser.Node(iterator.index..endIterator.index + 1, GFMElementTypes.INLINE_MATH))
                     } else {
-                        result.withNode(SequentialParser.Node(iterator.index..endIterator.index + 1, MarkdownElementTypes.BLOCK_MATH))
+                        result.withNode(SequentialParser.Node(iterator.index..endIterator.index + 1, GFMElementTypes.BLOCK_MATH))
                     }
                     iterator = endIterator.advance()
                     continue
@@ -37,8 +39,8 @@ class MathParser : SequentialParser {
     private fun findOfSize(it: TokensCache.Iterator, length: Int): TokensCache.Iterator? {
         var iterator = it
         while (iterator.type != null) {
-            if (iterator.type == MarkdownTokenTypes.DOLLAR) {
-                if (getLength(iterator, true) == length) {
+            if (iterator.type == GFMTokenTypes.DOLLAR) {
+                if (iterator.length == length) {
                     return iterator
                 }
             }
@@ -46,19 +48,5 @@ class MathParser : SequentialParser {
             iterator = iterator.advance()
         }
         return null
-    }
-
-
-    private fun getLength(info: TokensCache.Iterator, canEscape: Boolean): Int {
-        var toSubtract = 0
-        if (info.type == MarkdownTokenTypes.ESCAPED_DOLLAR) {
-            toSubtract = if (canEscape) {
-                2
-            } else {
-                1
-            }
-        }
-
-        return info.length - toSubtract
     }
 }

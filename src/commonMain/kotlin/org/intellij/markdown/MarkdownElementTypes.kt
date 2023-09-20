@@ -20,10 +20,6 @@ object MarkdownElementTypes {
     @JvmField
     val CODE_SPAN: IElementType = MarkdownElementType("CODE_SPAN")
     @JvmField
-    val INLINE_MATH: IElementType = MarkdownElementType("INLINE_MATH")
-    @JvmField
-    val BLOCK_MATH: IElementType = MarkdownElementType("BLOCK_MATH")
-    @JvmField
     val HTML_BLOCK: IElementType = MarkdownElementType("HTML_BLOCK")
     @JvmField
     val PARAGRAPH: IElementType = MarkdownElementType("PARAGRAPH", true)
