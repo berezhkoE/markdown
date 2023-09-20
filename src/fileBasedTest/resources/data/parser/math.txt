@@ -1,0 +1,28 @@
+Markdown:MARKDOWN_FILE
+  Markdown:PARAGRAPH
+    Markdown:TEXT('This expression uses')
+    WHITE_SPACE(' ')
+    Markdown:CODE_SPAN
+      Markdown:BACKTICK('`')
+      Markdown:ESCAPED_DOLLAR('\$')
+      Markdown:BACKTICK('`')
+    WHITE_SPACE(' ')
+    Markdown:TEXT('to display a dollar sign')
+    Markdown::(':')
+    WHITE_SPACE(' ')
+    Markdown:INLINE_MATH
+      Markdown:DOLLAR('$')
+      Markdown:TEXT('\sqrt{')
+      Markdown:ESCAPED_DOLLAR('\$')
+      Markdown:TEXT('4}')
+      Markdown:DOLLAR('$')
+  Markdown:EOL('\n')
+  Markdown:EOL('\n')
+  Markdown:PARAGRAPH
+    Markdown:BLOCK_MATH
+      Markdown:DOLLAR('$$')
+      Markdown:TEXT('\sum')
+      Markdown:EMPH('_')
+      Markdown:TEXT('{k=1}^n a_k^2')
+      Markdown:DOLLAR('$$')
+  Markdown:EOL('\n')

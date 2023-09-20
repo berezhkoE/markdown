@@ -80,6 +80,12 @@ open class MarkdownTokenTypes {
         val ESCAPED_BACKTICKS: IElementType = MarkdownElementType("ESCAPED_BACKTICKS", true)
 
         @JvmField
+        val DOLLAR: IElementType = MarkdownElementType("DOLLAR", true)
+
+        @JvmField
+        val ESCAPED_DOLLAR: IElementType = MarkdownElementType("ESCAPED_DOLLAR", true)
+
+        @JvmField
         val LIST_BULLET: IElementType = MarkdownElementType("LIST_BULLET", true)
 
         @JvmField
